@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Progressbar</title>
+        <link rel="stylesheet" href="progressbar.css" type="text/css"/>
+        <style>
+            * {margin:0;padding:0;}
+            body{padding:10px;}
+            h1{font-size:22px;margin:15px 0 5px;}
+            h2{font-size:20px;margin:13px 0 5px;}
+            h3{font-size:18px;margin:11px 0 5px;}
+            h4{font-size:16px;margin:9px 0 5px;}
+            h5{font-size:14px;margin:7px 0 5px;}
+            h6{font-size:12px;margin:5px 0 5px;}
+            p,.line{display:block;padding:5px;}
+            p{line-height:150%;}
+            button{padding:3px;margin:5px;}
+            
+            .testwarp{display:inline-block;width:500px;padding:5px;}
+        </style>
+    </head>
+    <body>
+        <div id="csstest">
+            <h3>CSS测试</h3>
+            <div class="line"><div class="testwarp">
+                <div class="progressbar">
+                    <div class="progressbar-value" style="width:493px;">即将完成...</div>
+                </div>
+            </div></div>
+            <div class="line"><div class="testwarp">
+                <div class="progressbar progressbar-red"><div class="progressbar-value" style="width:493px;">99%</div></div>
+            </div></div>
+            <div class="line"><div class="testwarp">
+                <div class="progressbar progressbar-orange"><div class="progressbar-value" style="width:493px;">99%</div></div>
+            </div></div>
+            <div class="line"><div class="testwarp">
+                <div class="progressbar progressbar-yellow"><div class="progressbar-value" style="width:493px;">99%</div></div>
+            </div></div>
+            <div class="line"><div class="testwarp">
+                <div class="progressbar progressbar-green"><div class="progressbar-value" style="width:493px;">99%</div></div>
+            </div></div>
+            <div class="line"><div class="testwarp">
+                <div class="progressbar progressbar-blue"><div class="progressbar-value" style="width:493px;">99%</div></div>
+            </div></div>
+            <div class="line"><div class="testwarp">
+                <div class="progressbar progressbar-purple"><div class="progressbar-value" style="width:493px;">99%</div></div>
+            </div></div>
+            <div class="line"><div class="testwarp">
+                <div class="progressbar progressbar-pink"><div class="progressbar-value" style="width:493px;">99%</div></div>
+            </div></div>
+        </div>
+        <div id="action">
+            <h3>操作</h3>
+            <p>
+                <button onclick="test1();">测试1</button>
+                <button onclick="test2();">测试2</button>
+                <button onclick="test3();">测试3</button>
+            </p>
+        </div>
+        <div id="demo">
+            <h3>组件演示</h3>
+            <div class="line"><div class="testwarp"></div></div>
+        </div>
+        <div id="demo2">
+            <h3>组件演示2</h3>
+            <div class="line"><div class="testwarp">
+                <div class="progressbar">
+                    <div class="progressbar-value" style="width:90%;">即将完成...</div>
+                </div>
+            </div></div>
+        </div>
+        <script src="https://raw.github.com/RockMing/GnimJS/master/full/gnim.js"></script>
+        <script src="https://raw.github.com/RockMing/GnimJS/master/full/gnim-fx.js"></script>
+        <script src="progressbar-min.js"></script>
+        <script>
+            function _fname(){
+                return (Progressbar.fx && $.fx)?'anim':'css';
+            }
+            //$('#csstest .progressbar-value').anim({width:'350px'});
+            function test1(){
+                $('#csstest .progressbar-value').text('30%')[_fname()]({width:'150px'});
+            }
+            function test2(){
+                $('#csstest .progressbar-value').text('70%')[_fname()]({width:'350px'});
+            }
+            function test3(){
+                //宽度小于50px则不显示进度文本
+                $('#csstest .progressbar-value').text('')[_fname()]({width:'25px'});
+            }
+            
+            $.ready(function(){
+                var p=new Progressbar('#demo .testwarp');
+                var p2=new Progressbar($('#demo2 .progressbar')[0]);
+                var i=0;
+                setInterval(function(){
+                    if(i++ %2==0){
+                        p.color('#468bca', '#eef').set(0.3);
+                        p2.color('#468bca', '#eef').set(1);
+                    }else{
+                        p.color('#71bb37', '#efe', null, 2500).set(0.7,null,2500);
+                        p2.color('#71bb37', '#efe', null, 2500).set(0.7,null,2500);
+                    }
+                }, 3000);
+            });
+        </script>
+    </body>
+</html>
